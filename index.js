@@ -1,4 +1,4 @@
-
+const generateHTML = require('./src/generateHTML.js');
 
 const inquirer = require('inquirer');
 const fs = require('fs');
@@ -97,3 +97,18 @@ const addEmployee = () => {
         team.push(employee);
     })
 };
+
+const writeFile = data => {
+    fs.writeFile(./dist/index.html), data => {
+        console.log("Your team profile has been created!")
+    }
+};
+
+addManager()
+    .then(addEmployee)
+    .then(team => {
+        return generateHTML(team);
+    })
+    .then(pageHTML => {
+        return writeFile(pageHTML);
+    });
