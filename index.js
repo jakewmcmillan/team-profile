@@ -36,7 +36,7 @@ const addManager = () => {
     ])
     .then(managerData => {
         const { name, id, email, officeNumber } = managerData;
-        const manager = Manager (name, id, email, officeNumber);
+        const manager = new Manager (name, id, email, officeNumber);
         team.push(manager);
         console.log(manager);
     })
@@ -87,11 +87,11 @@ const addEmployee = () => {
         let { name, id, email, role, github } = employeeData;
         let employee;
         if (role === "Engineer") {
-            employee = Engineer (name, id, email, github);
+            employee = new Engineer (name, id, email, github);
             console.log(employee);
         }
         else if (role === "Intern") {
-            employee = Intern (name, id, email, school);
+            employee = new Intern (name, id, email, school);
             console.log(employee);
         }
         team.push(employee);
@@ -99,7 +99,7 @@ const addEmployee = () => {
 };
 
 const writeFile = data => {
-    fs.writeFile(./dist/index.html), data => {
+    fs.writeFile(dist/index.html), data => {
         console.log("Your team profile has been created!")
     }
 };
