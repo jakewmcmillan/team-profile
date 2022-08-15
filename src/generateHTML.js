@@ -87,4 +87,4 @@ function generateHTML(team) {
         </html>`;
 }
 
-module.exports = generateHTML
+module.exports = generateHTML;
