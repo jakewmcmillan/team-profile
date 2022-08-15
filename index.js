@@ -43,60 +43,124 @@ const addManager = () => {
 };
 const addEmployee = () => {
     return inquirer.prompt ([
+        // {
+        //     type: 'list',
+        //     name: 'additionalEmployee',
+        //     message: "What kind of employee would you like to add?",
+        //     choices: ["Engineer", "Intern", "I don't want to add any more team members"]
+        // },
         {
-            type: 'list',
+            type: 'confirm',
             name: 'additionalEmployee',
-            message: "Which type of team member would you like to add?",
-            choices: ["Engineer", "Intern", "I don't want to add any more team members"]
+            message: "Would you like to add another employee?",
+            default: false,
         },
-        {
-            type: 'input',
-            name: 'name',
-            message: "What is the employee's name?"
-        },
-        {
-            type: 'input',
-            name: 'id',
-            message: "What is the employee's ID?"
-        },
-        {
-            type: 'input',
-            name: 'email',
-            message: "What is the employee's email?"
-        },
-        {
-            type: 'input',
-            name: 'github',
-            message: "What is the employee's GitHub username?",
-            when: (input) = input.role === Engineer
-        },
-        {
-            type: 'input',
-            name: 'school',
-            message: "What is your employee's school?",
-            when: (input) = input.role === Intern
-        },
-        {
-            type: 'list',
-            name: 'additionalEmployee',
-            message: "Which type of team member would you like to add?",
-            choices: ["Engineer", "Intern", "I don't want to add any more team members"]
-        }
     ])
-    .then(employeeData => {
-        let { name, id, email, role, github } = employeeData;
-        let employee;
-        if (role === "Engineer") {
-            employee = new Engineer (name, id, email, github);
-            console.log(employee);
+    .then((employeeData) => {
+        if (employeeData.additionalEmployee === true) {
+           employeeType()
         }
-        else if (role === "Intern") {
-            employee = new Intern (name, id, email, school);
-            console.log(employee);
-        }
-        team.push(employee);
     })
-};
+}
+    const employeeType = () => {
+        inquirer.prompt([
+            {
+                type: 'list',
+                name: 'additionalEmployee',
+                message: "What kind of employee would you like to add?",
+                choices: ["Engineer", "Intern"]
+            }
+        ]).then((employeeData) => {
+            if (employeeData.additionalEmployee === "Engineer") {
+                engineerPrompt()
+            } else {
+                internPrompt()
+            } 
+        })
+    }
+    const engineerPrompt = () => {
+        console.log('Engineer has been added!')
+        inquirer.prompt([
+            {
+                type: 'input',
+                name: 'name',
+                message: "What is the employee's name?"
+            },
+            {
+                type: 'input',
+                name: 'id',
+                message: "What is the employee's ID?"
+            },
+            {
+                type: 'input',
+                name: 'email',
+                message: "What is the employee's email?"
+            },
+            {
+                type: 'input',
+                name: 'github',
+                message: "What is the employee's GitHub username?"
+            }
+        ])
+        .then(engineerData => {
+            const { name, id, email, github} = engineerData;
+            const engineer = new Engineer (name, id, email, github);
+            team.push(engineer);
+            console.log(engineer);
+        })
+    }
+    const internPrompt = () => {
+        console.log('Intern has been added!')
+        
+    }
+//         {
+//             type: 'input',
+//             name: 'name',
+//             message: "What is the employee's name?"
+//         },
+//         {
+//             type: 'input',
+//             name: 'id',
+//             message: "What is the employee's ID?"
+//         },
+//         {
+//             type: 'input',
+//             name: 'email',
+//             message: "What is the employee's email?"
+//         },
+//         {
+//             type: 'input',
+//             name: 'github',
+//             message: "What is the employee's GitHub username?",
+//             // when: (input) = input.role === Engineer
+//         },
+//         {
+//             type: 'input',
+//             name: 'school',
+//             message: "What is your employee's school?",
+//             // when: (input) = input.role === Intern
+//         },
+//         {
+//             type: 'list',
+//             name: 'additionalEmployee',
+//             message: "Which type of team member would you like to add?",
+//             choices: ["Engineer", "Intern", "I don't want to add any more team members"]
+//         }
+//     ])
+//     .then(employeeData => {
+//         let { name, id, email, role, github } = employeeData;
+//         let employee;
+//         if (role === "Engineer") {
+//             employee = new Engineer (name, id, email, github);
+//             console.log(employee);
+//         }
+//         else if (role === "Intern") {
+//             employee = new Intern (name, id, email, school);
+//             console.log(employee);
+//         }
+//         team.push(employee);
+//     })
+// };
 
 const writeFile = data => {
     fs.writeFile(dist/index.html), data => {
@@ -106,9 +170,9 @@ const writeFile = data => {
 
 addManager()
     .then(addEmployee)
-    .then(team => {
-        return generateHTML(team);
-    })
-    .then(pageHTML => {
-        return writeFile(pageHTML);
-    });
+    // .then(team => {
+    //     return generateHTML(team);
+    // })
+    // .then(pageHTML => {
+    //     return writeFile(pageHTML);
+    // });
