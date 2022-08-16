@@ -161,9 +161,9 @@ const writeFile = data => {
 
 addManager()
     .then(addEmployee)
-    .then(team => {
-        return generateHTML(team);
-    })
-    .then(pageHTML => {
-        return writeFile(pageHTML);
-    });
+    // .then(team => {
+    //     return generateHTML(team);
+    // })
+    // .then(pageHTML => {
+    //     return writeFile(pageHTML);
+    // });

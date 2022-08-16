@@ -1,14 +1,14 @@
 //Employees
-const Manager = require("./lib/Manager");
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
+const Manager = require("../lib/Manager");
+const Engineer = require("../lib/Engineer");
+const Intern = require("../lib/Intern");
 
 //Generate HTML page
-function generateHTML(team) {
+function generateHTML(data) {
 //Manager card
     const generateManager = (data) => {
         return `
-            <div class="card" style="width: 20rem;">
+            <div class="card";">
                 <div class="card-header">
                     <h2>Manager: ${data.name}</h2>
                 </div>
@@ -52,14 +52,14 @@ function generateHTML(team) {
 //Array for team
     const teamArray = [];
 
-    for (let i = 0; i < team.length; i++) {
-        const employee = team[i];
+    for (let i = 0; i < data.length; i++) {
+        const employee = data[i];
         if (employee instanceof Manager) {
-            newArray.push(generateManager(employee));
+            teamArray.push(generateManager(employee));
         } else if (employee instanceof Engineer) {
-            newArray.push(generateEngineer(employee));
+            teamArray.push(generateEngineer(employee));
         } else if (employee instanceof Intern) {
-            newArray.push(generateIntern(employee));
+            teamArray.push(generateIntern(employee));
         }
     }
 //HTML skeleton
