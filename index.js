@@ -138,15 +138,6 @@ const addEmployee = () => {
             employeeType();
         })
     }
-    const newEmployee = () => {
-        inquirer.prompt([
-            {
-                type: 'input',
-                name: ''
-            }
-        ])
-    }
-
 
     (employeeData => {
         let { name, id, email, role, github } = employeeData;
@@ -170,9 +161,9 @@ const writeFile = data => {
 
 addManager()
     .then(addEmployee)
-    // .then(team => {
-    //     return generateHTML(team);
-    // })
-    // .then(pageHTML => {
-    //     return writeFile(pageHTML);
-    // });
+    .then(team => {
+        return generateHTML(team);
+    })
+    .then(pageHTML => {
+        return writeFile(pageHTML);
+    });
