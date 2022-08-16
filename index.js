@@ -125,7 +125,7 @@ const addEmployee = () => {
             },
             {
                 type: 'input',
-                name: 'email',
+                name: 'school',
                 message: "What is the intern's school?"
             }
         ])
@@ -161,9 +161,9 @@ const writeFile = data => {
 
 addManager()
     .then(addEmployee)
-    // .then(team => {
-    //     return generateHTML(team);
-    // })
-    // .then(pageHTML => {
-    //     return writeFile(pageHTML);
-    // });
+    .then(team => {
+        return generateHTML(team);
+    })
+    .then(pageHTML => {
+        return writeFile(pageHTML);
+    });

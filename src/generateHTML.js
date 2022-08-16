@@ -50,6 +50,7 @@ function generateHTML(data) {
             </div>\n`
     }
 //Array for team
+generateHTML = (data) => {
     const teamArray = [];
 
     for (let i = 0; i < data.length; i++) {
@@ -62,6 +63,7 @@ function generateHTML(data) {
             teamArray.push(generateIntern(employee));
         }
     }
+
 //HTML skeleton
     return `
         <!DOCTYPE html>
@@ -85,6 +87,7 @@ function generateHTML(data) {
         </body>
         <script></script>
         </html>`;
+}
 }
 
 module.exports = generateHTML;
